@@ -55,6 +55,10 @@ public class GreetingController {
         return "Hello SpringBoot";
     }
 
-
+    @PostMapping("/save")
+    public MessageDTO save(@RequestBody MessageDTO message){
+        return gs.saveMessage(message);
+    }
 
 }
+
