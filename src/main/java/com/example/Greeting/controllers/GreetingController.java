@@ -60,5 +60,11 @@ public class GreetingController {
         return gs.saveMessage(message);
     }
 
+    @GetMapping("/find/{id}")
+    public MessageDTO findById(@PathVariable Long id) {
+
+        return gs.findById(id);
+    }
+
 }
 
