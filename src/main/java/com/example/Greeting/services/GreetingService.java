@@ -33,4 +33,15 @@ public class GreetingService {
 
         return dto;
     }
+
+    public MessageDTO findById(Long id){
+
+        MessageEntity m1 = greetingRepository.findById(id).orElseThrow(() -> new RuntimeException("No messages found with given id"));
+
+        MessageDTO m2 = new MessageDTO(m1.getMessage());
+        m2.setId(m1.getId());
+
+        return m2;
+
+    }
 }
