@@ -79,6 +79,13 @@ public class GreetingController {
         return gs.editById(message, id);
     }
 
+    //UC8
+    @DeleteMapping("/delete/{id}")
+    public String delete(@PathVariable Long id){
+        return gs.delete(id);
+    }
+
+
 
 }
 
