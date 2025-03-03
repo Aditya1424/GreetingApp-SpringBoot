@@ -73,6 +73,12 @@ public class GreetingController {
         return gs.listAll();
     }
 
+    //UC7
+    @PostMapping("/edit/{id}")
+    public MessageDTO editById(@RequestBody MessageDTO message, @PathVariable Long id){
+        return gs.editById(message, id);
+    }
+
 
 }
 

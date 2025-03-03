@@ -59,4 +59,19 @@ public class GreetingService {
         return list;
     }
 
+    public MessageDTO editById(MessageDTO message, Long id){
+
+        MessageEntity m = greetingRepository.findById(id).orElseThrow(() -> new RuntimeException("No Message was found with given id"));
+
+        m.setMessage(message.getMessage());
+
+        greetingRepository.save(m);
+
+        MessageDTO m2 = new MessageDTO(m.getMessage());
+        m2.setId(m.getId());
+
+        return m2;
+    }
+
+
 }
