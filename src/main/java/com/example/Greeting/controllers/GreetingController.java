@@ -2,6 +2,7 @@ package com.example.Greeting.controllers;
 
 import com.example.Greeting.dto.MessageDTO;
 import com.example.Greeting.services.GreetingService;
+import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,11 +32,28 @@ public class GreetingController {
         return "{\""+message+": \"Hello from PUT Request!\"}";
 
     }
-
+    @GetMapping("/service")
     public String serviceGreetings(){
         return gs.getGreetings();
     }
 
+    @GetMapping("/query")
+    public String queryGreetings(@PathParam("firstName") String firstName, @PathParam("lastName") String lastName){
+
+        if(firstName!= null && lastName!= null){
+            return "Hello "+firstName+" "+ lastName;
+        }
+
+        else if(firstName!= null){
+            return "Hello "+ firstName;
+        }
+
+        else if(lastName!= null){
+            return "Hello "+ lastName;
+        }
+        else
+        return "Hello SpringBoot";
+    }
 
 
 
