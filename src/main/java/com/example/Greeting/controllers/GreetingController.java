@@ -8,13 +8,13 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/greeting")
 public class GreetingController {
-    @Autowired
+//    @Autowired
     GreetingService gs;
 
 //    This is constructor injection
-//    public GreetingController(GreetingService gs){
-//        this.gs= gs;
-//    }
+    public GreetingController(GreetingService gs){
+        this.gs= gs;
+    }
 
     @GetMapping("/get")
     public String getGreetings(){
