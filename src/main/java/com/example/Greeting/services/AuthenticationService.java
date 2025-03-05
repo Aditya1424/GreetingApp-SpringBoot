@@ -53,7 +53,7 @@ public class AuthenticationService {
     public String login(LoginDTO user){
 
         List<AuthUser> l1 = userRepository.findAll().stream().filter(authuser -> authuser.getEmail().equals(user.getEmail())).collect(Collectors.toList());
-        if(l1.size() == 0)
+        if(l1.size()== 0)
             return "User not registered";
 
         AuthUser foundUser = l1.get(0);
@@ -75,9 +75,5 @@ public class AuthenticationService {
 
         return "user logged in"+"\ntoken : "+token;
     }
-
-
-
-
 
 }
