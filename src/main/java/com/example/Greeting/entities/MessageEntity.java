@@ -11,11 +11,10 @@ public class MessageEntity {
     String message;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
     public MessageEntity(){
-
     }
 
     public MessageEntity(String message) {
@@ -38,7 +37,5 @@ public class MessageEntity {
     public void setMessage(String message) {
         this.message = message;
     }
-
-
 }
 
