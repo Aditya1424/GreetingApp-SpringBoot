@@ -42,3 +42,5 @@ public class UserController {
 
 
 }
+
+//UC12 --> Added Swagger Config to use Swagger at url(/swagger)
