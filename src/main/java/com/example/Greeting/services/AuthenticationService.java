@@ -19,6 +19,8 @@ public class AuthenticationService implements IAuthInterface {
     EmailService emailService;
     JwtTokenService jwtTokenService;
 
+    BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+
     public AuthenticationService(UserRepository userRepository, EmailService emailService, JwtTokenService jwtTokenService) {
         this.userRepository = userRepository;
         this.emailService = emailService;
@@ -99,5 +101,25 @@ public class AuthenticationService implements IAuthInterface {
         AuthUserDTO resDto = new AuthUserDTO(foundUser.getFirstName(), foundUser.getLastName(), foundUser.getEmail(), foundUser.getPassword(), foundUser.getId());
 
         return resDto;
+    }
+
+    public String resetPassword(String email, String currentPass, String newPass){
+
+        AuthUser foundUser = userRepository.findByEmail(email);
+
+        if(foundUser == null)
+            return "user not registered!";
+
+        if(!bCryptPasswordEncoder.matches(currentPass, foundUser.getHashPass()))
+            return "incorrect password!";
+
+        foundUser.setHashPass(bCryptPasswordEncoder.encode(newPass));
+        foundUser.setPassword(newPass);
+
+        userRepository.save(foundUser);
+
+        emailService.sendEmail(email, "Password reset status", "Your password is reset successfully");
+
+        return "Password reset successfull!";
     }
 }
