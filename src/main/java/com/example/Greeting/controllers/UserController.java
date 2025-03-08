@@ -1,36 +1,30 @@
 package com.example.Greeting.controllers;
 
-import com.example.Greeting.dto.LoginDTO;
-import com.example.Greeting.dto.MailDTO;
-import com.example.Greeting.dto.MessageDTO;
-import com.example.Greeting.dto.AuthUserDTO;
-import com.example.Greeting.services.AuthenticationService;
+import com.example.Greeting.dto.*;
+import com.example.Greeting.interfaces.IAuthInterface;
 import com.example.Greeting.services.EmailService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class UserController {
+    @Autowired
     EmailService emailService;
-    AuthenticationService authenticationService;
 
-    public UserController(EmailService emailService, AuthenticationService authenticationService) {
-        this.emailService = emailService;
-        this.authenticationService = authenticationService;
-    }
+    @Autowired
+    IAuthInterface iAuthInterface;
 
     //UC9 --> For Registration of a user
-    @PostMapping(path = "/register")
+    @PostMapping("/register")
     public String register(@RequestBody AuthUserDTO user){
-        return authenticationService.register(user);
+        return iAuthInterface.register(user);
     }
 
-
     //UC10 --> For User Login
-    @PostMapping(path ="/login")
+    @PostMapping("/login")
     public String login(@RequestBody LoginDTO user){
-        return authenticationService.login(user);
+        return iAuthInterface.login(user);
     }
 
     //UC11 --> For sending mail to another person
@@ -40,8 +34,14 @@ public class UserController {
         return "Mail sent";
     }
 
+    //UC12 --> Added Swagger Config to use Swagger at url(/swagger)
+
+
+    //UC13 --> Added forgot password functionality
+    @PutMapping("/forgotPassword/{email}")
+    public AuthUserDTO forgotPassword(@RequestBody PassDTO pass, @PathVariable String email){
+        return iAuthInterface.forgotPassword(pass, email);
+    }
 
 
 }
-
-//UC12 --> Added Swagger Config to use Swagger at url(/swagger)
