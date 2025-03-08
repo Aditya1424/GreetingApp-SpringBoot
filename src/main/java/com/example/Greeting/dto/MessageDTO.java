@@ -1,36 +1,24 @@
 package com.example.Greeting.dto;
 
+import jakarta.persistence.Access;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class MessageDTO {
 
     String message;
+
     Long id;
 
-//    Constructor
-    public MessageDTO(String message){
-
-        this.message= message;
-        this.id= null;
-    }
-
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-//    Getter
-    public String getMessage(){
-        return message;
-    }
-
-//    Setter
-    public void setMessage(String message){
-        this.message= message;
+    public MessageDTO(String message) {
+        this.message = message;
+        this.id = null;
     }
 
 }
-
-

@@ -2,6 +2,7 @@ package com.example.Greeting.services;
 
 import com.example.Greeting.dto.MessageDTO;
 import com.example.Greeting.entities.MessageEntity;
+import com.example.Greeting.interfaces.IGreetingInterface;
 import com.example.Greeting.repositories.GreetingRepository;
 import org.springframework.stereotype.Service;
 
@@ -9,16 +10,16 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class GreetingService {
+public class GreetingService implements IGreetingInterface {
 
     String message;
     GreetingRepository greetingRepository;
 
-
-    public GreetingService(GreetingRepository greetingRepository){
-        this.greetingRepository= greetingRepository;
-        message= "Hey What's up!!";
+    public GreetingService(GreetingRepository greetingRepository) {
+        this.greetingRepository = greetingRepository;
+        message = "Hello World!";
     }
+
 
     public String getGreetings(){
         return this.message;
@@ -82,6 +83,5 @@ public class GreetingService {
         return "Message Deleted";
 
     }
-
 
 }
